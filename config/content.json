@@ -1,0 +1,286 @@
+{
+  "recipientName": "Sukanya",
+  "password": "I Love You",
+  "bootMessages": [
+    "Searching Memories...",
+    "Decrypting Love...",
+    "Preparing Magic...",
+    "Loading Surprise...",
+    "Welcome..."
+  ],
+  "photos": [
+    {
+      "id": "memory-1",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.06 PM.jpeg",
+      "caption": "Beautiful moment 1",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "memory-2",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.07 PM (1).jpeg",
+      "caption": "Beautiful moment 2",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "memory-3",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.07 PM (2).jpeg",
+      "caption": "Beautiful moment 3",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "memory-4",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.07 PM.jpeg",
+      "caption": "Beautiful moment 4",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "memory-5",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.08 PM (1).jpeg",
+      "caption": "Beautiful moment 5",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "memory-6",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.08 PM (2).jpeg",
+      "caption": "Beautiful moment 6",
+      "date": "2024-01-15"
+    }
+  ],
+  "videos": [],
+  "music": {
+    "scenes": {
+      "boot": "/audio/piano-gentle.mp3",
+      "galaxy": "/audio/cosmic-ambient.mp3",
+      "moon": "/audio/emotional-strings.mp3",
+      "butterflies": "/audio/magical-transition.mp3",
+      "password": "/audio/mysterious-piano.mp3",
+      "forest": "/audio/nature-ambient.mp3",
+      "giftBox": "/audio/suspense-reveal.mp3",
+      "memoryTunnel": "/audio/nostalgic-piano.mp3",
+      "timeline": "/audio/journey-strings.mp3",
+      "cake": "/audio/birthday-celebration.mp3",
+      "letter": "/audio/soft-piano.mp3",
+      "question": "/audio/heartfelt-moment.mp3",
+      "celebration": "/audio/grand-finale.mp3",
+      "auroraSky": "/audio/peaceful-ending.mp3",
+      "hiddenSurprise": "/audio/gentle-discovery.mp3"
+    },
+    "effects": {
+      "sparkle": "/audio/sfx/sparkle.mp3",
+      "whoosh": "/audio/sfx/whoosh.mp3",
+      "pop": "/audio/sfx/pop.mp3",
+      "heartbeat": "/audio/sfx/heartbeat.mp3",
+      "unlock": "/audio/sfx/unlock.mp3",
+      "firework": "/audio/sfx/firework.mp3",
+      "applause": "/audio/sfx/applause.mp3",
+      "blow": "/audio/sfx/blow.mp3",
+      "birds": "/audio/sfx/birds.mp3",
+      "wind": "/audio/sfx/wind.mp3"
+    }
+  },
+  "timeline": [
+    {
+      "id": "timeline-1",
+      "date": "2024-02-01",
+      "title": "Memory 1",
+      "description": "A special time together",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.08 PM.jpeg"
+    },
+    {
+      "id": "timeline-2",
+      "date": "2024-02-02",
+      "title": "Memory 2",
+      "description": "A special time together",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.09 PM (1).jpeg"
+    },
+    {
+      "id": "timeline-3",
+      "date": "2024-02-03",
+      "title": "Memory 3",
+      "description": "A special time together",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.09 PM (2).jpeg"
+    },
+    {
+      "id": "timeline-4",
+      "date": "2024-02-04",
+      "title": "Memory 4",
+      "description": "A special time together",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.09 PM.jpeg"
+    },
+    {
+      "id": "timeline-5",
+      "date": "2024-02-05",
+      "title": "Memory 5",
+      "description": "A special time together",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.10 PM (1).jpeg"
+    },
+    {
+      "id": "timeline-6",
+      "date": "2024-02-06",
+      "title": "Memory 6",
+      "description": "A special time together",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.10 PM (2).jpeg"
+    }
+  ],
+  "quotes": [
+    "In all the world, there is no heart for me like yours.",
+    "You are my today and all of my tomorrows.",
+    "I love you not only for what you are, but for what I am when I am with you.",
+    "Every love story is beautiful, but ours is my favourite.",
+    "You are the finest, loveliest, tenderest, and most beautiful person I have ever known."
+  ],
+  "loveLetter": "My Dearest,\n\nOn this special day, I want you to know that you are the most extraordinary person I've ever met. Every moment with you feels like a gift I never knew I needed.\n\nFrom the first time our eyes met, I knew there was something different about you. You have this incredible way of making everything around you more beautiful, more meaningful, more alive.\n\nYour laughter is my favourite melody. Your smile lights up my darkest days. Your kindness inspires me to be better every single day.\n\nThank you for being you. Thank you for choosing me. Thank you for every memory we've created and every dream we've yet to chase.\n\nHappy Birthday, my love. Today and always, you are my everything.\n\nWith all my love,\nForever Yours",
+  "gallery": [
+    {
+      "id": "gallery-1",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.10 PM (3).jpeg",
+      "caption": "Gallery Photo 1"
+    },
+    {
+      "id": "gallery-2",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.10 PM.jpeg",
+      "caption": "Gallery Photo 2"
+    },
+    {
+      "id": "gallery-3",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.11 PM (1).jpeg",
+      "caption": "Gallery Photo 3"
+    },
+    {
+      "id": "gallery-4",
+      "src": "/images/gallery/WhatsApp Image 2026-07-26 at 5.59.11 PM.jpeg",
+      "caption": "Gallery Photo 4"
+    }
+  ],
+  "specialDates": [
+    {
+      "date": "2023-06-15",
+      "label": "The day we met"
+    },
+    {
+      "date": "2023-08-20",
+      "label": "Our first date"
+    },
+    {
+      "date": "2024-07-26",
+      "label": "Your birthday"
+    }
+  ],
+  "voiceNotes": [
+    {
+      "id": "voice-1",
+      "src": "/audio/voice/note-1.mp3",
+      "label": "A message from my heart",
+      "scene": "memoryTunnel"
+    }
+  ],
+  "futureDreams": [
+    "Travel the world together, one sunset at a time",
+    "Build our dream home with a garden full of flowers",
+    "Dance in the rain on a random Tuesday",
+    "Watch the northern lights from a cozy cabin",
+    "Grow old together, still holding hands"
+  ],
+  "bucketList": [
+    {
+      "id": "bl-1",
+      "item": "Hot air balloon ride at sunrise",
+      "done": false
+    },
+    {
+      "id": "bl-2",
+      "item": "Stargaze in the desert",
+      "done": false
+    },
+    {
+      "id": "bl-3",
+      "item": "Cook a seven-course meal together",
+      "done": false
+    },
+    {
+      "id": "bl-4",
+      "item": "Write letters to our future selves",
+      "done": false
+    },
+    {
+      "id": "bl-5",
+      "item": "Visit every continent",
+      "done": false
+    },
+    {
+      "id": "bl-6",
+      "item": "Learn to dance the waltz",
+      "done": false
+    }
+  ],
+  "reasonsILoveYou": [
+    "The way your eyes light up when you talk about something you love",
+    "Your kindness to everyone you meet",
+    "How you always know exactly what to say",
+    "Your incredible strength and grace",
+    "The way you make even ordinary moments feel magical",
+    "Your beautiful, contagious laughter",
+    "How you never give up on the people you love",
+    "Your creativity and imagination",
+    "The way you see the best in everyone",
+    "Simply because you are you"
+  ],
+  "loveCoupons": [
+    {
+      "id": "coupon-1",
+      "title": "One Breakfast in Bed",
+      "description": "Redeemable any morning",
+      "icon": "coffee"
+    },
+    {
+      "id": "coupon-2",
+      "title": "Movie Night Your Pick",
+      "description": "No complaints, I promise",
+      "icon": "film"
+    },
+    {
+      "id": "coupon-3",
+      "title": "Unlimited Hugs Day",
+      "description": "24 hours of nonstop hugs",
+      "icon": "heart"
+    },
+    {
+      "id": "coupon-4",
+      "title": "Adventure Day",
+      "description": "Surprise destination of your choice",
+      "icon": "compass"
+    },
+    {
+      "id": "coupon-5",
+      "title": "Spa Evening at Home",
+      "description": "Complete with candles and music",
+      "icon": "sparkles"
+    }
+  ],
+  "promiseWall": [
+    "I promise to always make you laugh, even on hard days",
+    "I promise to support every dream you chase",
+    "I promise to be your safe place, always",
+    "I promise to never stop choosing you",
+    "I promise to grow with you, every single day"
+  ],
+  "question": {
+    "text": "Will you always be my favourite person? ❤️",
+    "yesText": "YES ❤️",
+    "noText": "NO 🙈",
+    "noMessages": [
+      "Are you sure? 🥺",
+      "Think again ❤️",
+      "Please? 😊",
+      "Just teasing 😄"
+    ],
+    "noClickMessage": "That's okay ❤️\nI still hope this birthday makes you smile."
+  },
+  "finalMessage": "You are the most beautiful part of my life.",
+  "celebrationTexts": [
+    "Happy Birthday",
+    "{recipientName}",
+    "I Love You",
+    "Forever"
+  ]
+}
