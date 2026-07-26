@@ -4,142 +4,20 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useAuroraStore } from '@/store/useAuroraStore';
 import { useAudio } from '@/hooks/useAudio';
-import { cn, formatDate } from '@/lib/utils';
 import ParticleBackground from '@/components/ui/ParticleBackground';
-import type { TimelineEvent } from '@/types';
-
-const iconMap: Record<string, string> = {
-  heart: '❤️',
-  phone: '📱',
-  gift: '🎁',
-  map: '🗺️',
-  camera: '📸',
-  cake: '🎂',
-  star: '⭐',
-  music: '🎵',
-  ring: '💍',
-  home: '🏠',
-};
-
-function TimelineItem({
-  event,
-  index,
-  isExpanded,
-  onToggle,
-}: {
-  event: TimelineEvent;
-  index: number;
-  isExpanded: boolean;
-  onToggle: () => void;
-}) {
-  const itemRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const isLeft = index % 2 === 0;
-
-  useEffect(() => {
-    if (itemRef.current) {
-      gsap.fromTo(
-        itemRef.current,
-        { opacity: 0, x: isLeft ? -60 : 60 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          delay: 0.3 + index * 0.2,
-          ease: 'power3.out',
-        }
-      );
-    }
-  }, [index, isLeft]);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      if (isExpanded) {
-        gsap.fromTo(
-          contentRef.current,
-          { height: 0, opacity: 0 },
-          { height: 'auto', opacity: 1, duration: 0.5, ease: 'power2.out' }
-        );
-      } else {
-        gsap.to(contentRef.current, {
-          height: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power2.in',
-        });
-      }
-    }
-  }, [isExpanded]);
-
-  return (
-    <div
-      ref={itemRef}
-      className={cn(
-        'group relative flex items-start gap-6 opacity-0',
-        'md:w-1/2',
-        isLeft ? 'md:pr-12 md:self-start md:text-right' : 'md:pl-12 md:self-end'
-      )}
-    >
-      {/* Connector dot */}
-      <div
-        className={cn(
-          'absolute top-2 hidden h-4 w-4 rounded-full border-2 border-amber-400/50 bg-aurora-bg-deep md:block',
-          'shadow-[0_0_12px_rgba(212,168,83,0.3)]',
-          isLeft ? '-right-2 md:-right-8' : '-left-2 md:-left-8'
-        )}
-      />
-
-      <button
-        onClick={onToggle}
-        className={cn(
-          'flex w-full flex-col gap-3 rounded-2xl border border-white/5 p-5 text-left transition-all duration-500',
-          'bg-white/[0.02] backdrop-blur-xl',
-          'hover:border-amber-400/20 hover:bg-white/[0.04]',
-          isExpanded && 'border-amber-400/20 bg-white/[0.04]'
-        )}
-        aria-expanded={isExpanded}
-      >
-        <div className={cn('flex items-center gap-3', isLeft && 'md:flex-row-reverse')}>
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/5 text-lg">
-            {iconMap[event.icon] || '✨'}
-          </span>
-          <div className={cn('flex flex-col', isLeft && 'md:items-end')}>
-            <span className="font-serif text-base font-medium text-white/80">
-              {event.title}
-            </span>
-          </div>
-        </div>
-
-        {/* Expanded content */}
-        <div ref={contentRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
-          <div className="border-t border-white/5 pt-4">
-            <p className="text-sm leading-relaxed text-white/50">{event.description}</p>
-            {event.image && (
-              <div className="mt-4 aspect-video overflow-hidden rounded-xl bg-white/5">
-                <div className="flex h-full items-center justify-center text-white/10">
-                  <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </button>
-    </div>
-  );
-}
 
 export default function Scene09Timeline() {
   const content = useAuroraStore((s) => s.content);
   const nextScene = useAuroraStore((s) => s.nextScene);
   const { playTrack } = useAudio();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const bookRef = useRef<HTMLDivElement>(null);
 
-  const events = content?.timeline || [];
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Get the first photo from gallery or photos
+  const leftImage = content?.gallery?.[0]?.src || content?.photos?.[0]?.src || '';
+  const noteText = content?.personalNote || "Happy Birthday!";
 
   useEffect(() => {
     if (content?.music?.scenes?.timeline) {
@@ -147,70 +25,141 @@ export default function Scene09Timeline() {
     }
   }, [content, playTrack]);
 
+  useEffect(() => {
+    if (bookRef.current) {
+      gsap.fromTo(
+        bookRef.current,
+        { scale: 0.8, opacity: 0, y: 50 },
+        { scale: 1, opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' }
+      );
+    }
+  }, []);
+
+  const openBook = () => {
+    setIsOpen(true);
+  };
+
+  const handleNext = () => {
+    if (containerRef.current) {
+      gsap.to(containerRef.current, {
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.inOut',
+        onComplete: nextScene,
+      });
+    }
+  };
+
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-screen w-screen bg-[#050505] py-20"
-    >
+    <div ref={containerRef} className="relative min-h-screen w-screen overflow-hidden bg-[#050505] flex items-center justify-center perspective-[2000px]">
       <ParticleBackground preset="stars" />
 
       {/* Ambient glow */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            'radial-gradient(ellipse at 50% 0%, rgba(167,139,250,0.05) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.1) 0%, transparent 60%)',
         }}
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6">
-        {/* Title */}
-        <div className="mb-16 text-center">
+      <div className="relative z-10 w-full max-w-4xl px-4 md:px-8">
+        
+        <div className="mb-12 text-center transition-opacity duration-1000" style={{ opacity: isOpen ? 0 : 1 }}>
           <h2 className="font-script text-4xl text-amber-300/70 md:text-5xl">
-            Our Journey
+            A Note For You
           </h2>
-          <div className="mx-auto mt-4 h-px w-32 bg-gradient-to-r from-transparent via-amber-400/30 to-transparent" />
-          <p className="mt-4 text-sm text-white/30">Click any moment to relive it</p>
+          <p className="mt-4 text-sm text-white/30">Click to open</p>
         </div>
 
-        {/* Timeline line */}
-        <div className="relative flex flex-col gap-8">
-          {/* Center line (desktop) */}
-          <div className="absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-amber-400/20 to-transparent md:block" />
+        {/* Book Container */}
+        <div 
+          ref={bookRef}
+          className={`relative mx-auto w-full max-w-[800px] aspect-[2/1.2] md:aspect-[2/1] transition-transform duration-1000 transform-style-3d cursor-pointer ${isOpen ? '' : 'hover:scale-105'}`}
+          onClick={!isOpen ? openBook : undefined}
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: isOpen ? 'rotateX(5deg)' : 'rotateX(15deg) rotateY(-20deg)',
+          }}
+        >
+          {/* Back Cover */}
+          <div className="absolute inset-0 rounded-l-2xl rounded-r-xl bg-[#2a1a08] shadow-2xl border border-[#4a2e0e]"></div>
+          
+          {/* Pages Container */}
+          <div className="absolute inset-[10px] md:inset-[15px] flex rounded-lg overflow-hidden bg-[#fdf5e6] shadow-inner">
+            
+            {/* Left Page (Image) */}
+            <div className="w-1/2 h-full relative border-r border-[#d4b483]/30 flex flex-col p-4 md:p-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
+              {leftImage && (
+                <div className="relative h-full w-full rounded-md overflow-hidden shadow-md border border-[#d4b483]/50 p-2 bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={leftImage} alt="Memory" className="w-full h-full object-cover rounded-sm" />
+                </div>
+              )}
+            </div>
 
-          {events.map((event, i) => (
-            <TimelineItem
-              key={event.id}
-              event={event}
-              index={i}
-              isExpanded={expandedId === event.id}
-              onToggle={() =>
-                setExpandedId(expandedId === event.id ? null : event.id)
-              }
-            />
-          ))}
+            {/* Right Page (Note) */}
+            <div className="w-1/2 h-full relative p-6 md:p-12 flex flex-col justify-center text-center">
+              <div className="absolute inset-0 bg-gradient-to-l from-black/5 to-transparent"></div>
+              <p className="font-serif text-[#4a2e0e] text-sm md:text-lg leading-relaxed whitespace-pre-line z-10 italic relative">
+                <span className="absolute -top-6 -left-4 text-4xl text-[#d4b483]/40">"</span>
+                {noteText}
+                <span className="absolute -bottom-6 -right-4 text-4xl text-[#d4b483]/40">"</span>
+              </p>
+              <p className="mt-8 font-script text-2xl md:text-3xl text-[#8b5a2b] z-10">
+                by me Kiran
+              </p>
+            </div>
+            
+          </div>
+
+          {/* Book Cover (Front) - Animates Open */}
+          <div 
+            className="absolute top-0 left-1/2 w-1/2 h-full bg-[#3a220b] border-l border-[#5a3614] rounded-r-xl shadow-2xl origin-left transition-transform duration-1500 ease-in-out flex items-center justify-center"
+            style={{ 
+              transformStyle: 'preserve-3d',
+              transform: isOpen ? 'rotateY(-180deg)' : 'rotateY(0deg)',
+            }}
+          >
+            {/* Front Cover Front Face */}
+            <div 
+              className="absolute inset-0 backface-hidden rounded-r-xl bg-gradient-to-r from-[#2a1a08] to-[#3a220b] border-2 border-[#5a3614] flex flex-col items-center justify-center p-8"
+              style={{ backfaceVisibility: 'hidden' }}
+            >
+              <div className="w-full h-full border-2 border-dashed border-[#d4b483]/20 rounded-lg flex flex-col items-center justify-center">
+                <span className="text-4xl mb-4">📖</span>
+                <h3 className="font-serif text-2xl text-[#d4b483] font-bold text-center">Our Story</h3>
+              </div>
+            </div>
+            {/* Front Cover Back Face */}
+            <div 
+              className="absolute inset-0 backface-hidden rounded-l-xl bg-[#fdf5e6] shadow-inner border-r border-[#d4b483]/30 flex flex-col p-8"
+              style={{ 
+                backfaceVisibility: 'hidden', 
+                transform: 'rotateY(180deg)' 
+              }}
+            >
+               <div className="absolute inset-0 bg-gradient-to-l from-black/10 to-transparent"></div>
+            </div>
+          </div>
+          
         </div>
 
         {/* Continue button */}
-        <div className="mt-16 text-center">
-          <button
-            onClick={() => {
-              if (containerRef.current) gsap.to(containerRef.current, {
-                opacity: 0,
-                duration: 1,
-                ease: 'power2.inOut',
-                onComplete: nextScene,
-              });
-            }}
-            className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm tracking-widest text-white/50 uppercase backdrop-blur-xl transition-all duration-500 hover:border-amber-400/30 hover:text-amber-300"
-          >
-            Continue
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-          </button>
-        </div>
+        {isOpen && (
+          <div className="mt-16 text-center animate-[fade-in-up_1s_ease-out_1s_both]">
+            <button
+              onClick={handleNext}
+              className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm tracking-widest text-white/50 uppercase backdrop-blur-xl transition-all duration-500 hover:border-amber-400/30 hover:text-amber-300"
+            >
+              Continue
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

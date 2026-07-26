@@ -12,53 +12,83 @@ import { useMicrophone } from '@/hooks/useMicrophone';
 import { useHaptics } from '@/hooks/useHaptics';
 
 /* ── Cake ── */
-function Cake() {
+function Cake({ cut }: { cut: boolean }) {
   const cakeRef = useRef<THREE.Group>(null);
+  const leftHalfRef = useRef<THREE.Group>(null);
+  const rightHalfRef = useRef<THREE.Group>(null);
 
   useFrame(({ clock }) => {
-    if (cakeRef.current) {
+    if (cakeRef.current && !cut) {
       cakeRef.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.2) * 0.05;
     }
   });
 
+  useEffect(() => {
+    if (cut && rightHalfRef.current && leftHalfRef.current) {
+      gsap.to(rightHalfRef.current.position, {
+        x: 0.3,
+        z: 0.2,
+        duration: 1,
+        ease: 'power2.out',
+      });
+      gsap.to(rightHalfRef.current.rotation, {
+        y: 0.1,
+        duration: 1,
+        ease: 'power2.out',
+      });
+      gsap.to(leftHalfRef.current.position, {
+        x: -0.1,
+        duration: 1,
+        ease: 'power2.out',
+      });
+    }
+  }, [cut]);
+
   return (
     <group ref={cakeRef} position={[0, -0.5, 0]}>
-      {/* Bottom tier */}
-      <mesh position={[0, 0, 0]} castShadow>
-        <cylinderGeometry args={[1.5, 1.5, 0.8, 32]} />
-        <meshStandardMaterial color="#f5e6d3" roughness={0.7} metalness={0.1} />
-      </mesh>
-      {/* Bottom frosting edge */}
-      <mesh position={[0, 0.4, 0]}>
-        <torusGeometry args={[1.5, 0.06, 8, 32]} />
-        <meshStandardMaterial color="#fff5e6" roughness={0.4} emissive="#fef3c7" emissiveIntensity={0.1} />
-      </mesh>
-
-      {/* Middle tier */}
-      <mesh position={[0, 0.8, 0]} castShadow>
-        <cylinderGeometry args={[1.1, 1.1, 0.7, 32]} />
-        <meshStandardMaterial color="#fce7f3" roughness={0.7} metalness={0.1} />
-      </mesh>
-      <mesh position={[0, 1.15, 0]}>
-        <torusGeometry args={[1.1, 0.05, 8, 32]} />
-        <meshStandardMaterial color="#fbcfe8" roughness={0.4} emissive="#f9a8d4" emissiveIntensity={0.1} />
-      </mesh>
-
-      {/* Top tier */}
-      <mesh position={[0, 1.4, 0]} castShadow>
-        <cylinderGeometry args={[0.7, 0.7, 0.5, 32]} />
-        <meshStandardMaterial color="#fef3c7" roughness={0.7} metalness={0.1} />
-      </mesh>
-      <mesh position={[0, 1.65, 0]}>
-        <torusGeometry args={[0.7, 0.04, 8, 32]} />
-        <meshStandardMaterial color="#fde68a" roughness={0.4} emissive="#fbbf24" emissiveIntensity={0.2} />
-      </mesh>
-
       {/* Plate */}
       <mesh position={[0, -0.42, 0]}>
         <cylinderGeometry args={[2, 2, 0.05, 32]} />
         <meshStandardMaterial color="#e5e7eb" roughness={0.2} metalness={0.8} />
       </mesh>
+
+      {/* LEFT HALF */}
+      <group ref={leftHalfRef}>
+        {/* Bottom tier */}
+        <mesh position={[0, 0, 0]} castShadow>
+          <cylinderGeometry args={[1.5, 1.5, 0.8, 32, 1, false, Math.PI / 2, Math.PI]} />
+          <meshStandardMaterial color="#f5e6d3" roughness={0.7} metalness={0.1} side={THREE.DoubleSide} />
+        </mesh>
+        {/* Middle tier */}
+        <mesh position={[0, 0.8, 0]} castShadow>
+          <cylinderGeometry args={[1.1, 1.1, 0.7, 32, 1, false, Math.PI / 2, Math.PI]} />
+          <meshStandardMaterial color="#fce7f3" roughness={0.7} metalness={0.1} side={THREE.DoubleSide} />
+        </mesh>
+        {/* Top tier */}
+        <mesh position={[0, 1.4, 0]} castShadow>
+          <cylinderGeometry args={[0.7, 0.7, 0.5, 32, 1, false, Math.PI / 2, Math.PI]} />
+          <meshStandardMaterial color="#fef3c7" roughness={0.7} metalness={0.1} side={THREE.DoubleSide} />
+        </mesh>
+      </group>
+
+      {/* RIGHT HALF */}
+      <group ref={rightHalfRef}>
+        {/* Bottom tier */}
+        <mesh position={[0, 0, 0]} castShadow>
+          <cylinderGeometry args={[1.5, 1.5, 0.8, 32, 1, false, -Math.PI / 2, Math.PI]} />
+          <meshStandardMaterial color="#f5e6d3" roughness={0.7} metalness={0.1} side={THREE.DoubleSide} />
+        </mesh>
+        {/* Middle tier */}
+        <mesh position={[0, 0.8, 0]} castShadow>
+          <cylinderGeometry args={[1.1, 1.1, 0.7, 32, 1, false, -Math.PI / 2, Math.PI]} />
+          <meshStandardMaterial color="#fce7f3" roughness={0.7} metalness={0.1} side={THREE.DoubleSide} />
+        </mesh>
+        {/* Top tier */}
+        <mesh position={[0, 1.4, 0]} castShadow>
+          <cylinderGeometry args={[0.7, 0.7, 0.5, 32, 1, false, -Math.PI / 2, Math.PI]} />
+          <meshStandardMaterial color="#fef3c7" roughness={0.7} metalness={0.1} side={THREE.DoubleSide} />
+        </mesh>
+      </group>
     </group>
   );
 }
@@ -147,22 +177,29 @@ export default function Scene10Cake() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [candlesLit, setCandlesLit] = useState(true);
-  const [showMessage, setShowMessage] = useState(false);
+  const [candlesBlownState, setCandlesBlownState] = useState(false);
   const [showMicPrompt, setShowMicPrompt] = useState(true);
+  const [cakeCut, setCakeCut] = useState(false);
 
   const handleBlow = () => {
     if (!candlesLit) return;
     setCandlesLit(false);
+    setCandlesBlownState(true);
     setCandlesBlown(true);
-    setShowMessage(true);
     haptics.trigger('light');
 
     try { playSfx(content?.music?.effects?.blow || ''); } catch {}
     setTimeout(() => {
       try { playSfx(content?.music?.effects?.applause || ''); } catch {}
     }, 1500);
+  };
 
-    // Auto advance
+  const handleCut = () => {
+    if (cakeCut) return;
+    setCakeCut(true);
+    haptics.trigger('medium');
+
+    // Auto advance after cutting
     setTimeout(() => {
       if (containerRef.current) gsap.to(containerRef.current, {
         opacity: 0,
@@ -170,7 +207,7 @@ export default function Scene10Cake() {
         ease: 'power2.inOut',
         onComplete: nextScene,
       });
-    }, 5000);
+    }, 4000);
   };
 
   const { isSupported, startListening } = useMicrophone({
@@ -206,7 +243,7 @@ export default function Scene10Cake() {
         dpr={isMobile ? [1, 1] : [1, 1.5]}
       >
         <RoomLighting candlesLit={candlesLit} />
-        <Cake />
+        <Cake cut={cakeCut} />
         <Candles lit={candlesLit} />
         <EffectComposer>
           <Bloom intensity={candlesLit ? 2 : 0.5} luminanceThreshold={0.3} luminanceSmoothing={0.9} />
@@ -262,14 +299,30 @@ export default function Scene10Cake() {
         </div>
       )}
 
-      {/* Success message */}
-      {showMessage && (
-        <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4 animate-[scale-in_0.8s_ease-out]">
+      {/* Cut Cake button */}
+      {candlesBlownState && !cakeCut && (
+        <div className="absolute inset-x-0 bottom-24 z-10 text-center animate-[fade-in-up_1s_ease-out]">
+          <div className="flex flex-col items-center gap-4">
             <p className="text-gradient-gold font-script text-4xl md:text-5xl">
               Make a wish! 🌟
             </p>
-            <p className="text-lg text-white/30">🎉 Happy Birthday! 🎉</p>
+            <button
+              onClick={handleCut}
+              className="mt-6 group inline-flex items-center gap-3 rounded-full border border-amber-400/30 bg-amber-400/10 px-8 py-3 text-sm tracking-widest text-amber-300 uppercase backdrop-blur-xl transition-all duration-500 hover:border-amber-400/50 hover:bg-amber-400/20"
+            >
+              Cut the Cake 🔪
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Final Celebration message */}
+      {cakeCut && (
+        <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4 animate-[scale-in_0.8s_ease-out]">
+            <p className="text-gradient-gold font-script text-5xl md:text-7xl">
+              Happy Birthday! 🎉
+            </p>
           </div>
         </div>
       )}

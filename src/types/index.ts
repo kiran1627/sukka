@@ -98,7 +98,8 @@ export type SceneId =
   | 'question'
   | 'celebration'
   | 'auroraSky'
-  | 'hiddenSurprise';
+  | 'hiddenSurprise'
+  | 'balloons';
 
 export const SCENE_ORDER: SceneId[] = [
   'boot',
@@ -116,4 +117,5 @@ export const SCENE_ORDER: SceneId[] = [
   'celebration',
   'auroraSky',
   'hiddenSurprise',
+  'balloons',
 ];

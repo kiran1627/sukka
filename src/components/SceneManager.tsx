@@ -21,6 +21,7 @@ const scenes = [
   lazy(() => import('@/components/scenes/Scene13Celebration')),
   lazy(() => import('@/components/scenes/Scene14AuroraSky')),
   lazy(() => import('@/components/scenes/Scene15HiddenSurprise')),
+  lazy(() => import('@/components/scenes/Scene16Balloons')),
 ];
 
 function SceneLoader() {
