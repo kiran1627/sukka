@@ -240,6 +240,7 @@ function SectionModal({
 
 export default function Scene15HiddenSurprise() {
   const content = useAuroraStore((s) => s.content);
+  const nextScene = useAuroraStore((s) => s.nextScene);
   const { playTrack } = useAudio();
   const haptics = useHaptics();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -327,11 +328,28 @@ export default function Scene15HiddenSurprise() {
           ))}
         </div>
 
-        {/* Final farewell */}
-        <div className="mt-16 text-center">
+        {/* Final farewell & Continue */}
+        <div className="mt-16 flex flex-col items-center gap-8 text-center pb-16">
           <p className="font-serif text-lg text-white/20 italic">
             Thank you for being born ❤️
           </p>
+          
+          <button
+            onClick={() => {
+              if (containerRef.current) gsap.to(containerRef.current, {
+                opacity: 0,
+                duration: 1,
+                ease: 'power2.inOut',
+                onComplete: nextScene,
+              });
+            }}
+            className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm tracking-widest text-white/50 uppercase backdrop-blur-xl transition-all duration-500 hover:border-amber-400/30 hover:text-amber-300"
+          >
+            Continue
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </button>
         </div>
       </div>
 
