@@ -99,7 +99,8 @@ function Candles({ lit, count = 5 }: { lit: boolean; count?: number }) {
     return Array.from({ length: count }, (_, i) => {
       const angle = (i / count) * Math.PI * 2;
       const r = 0.35;
-      return [Math.cos(angle) * r, 1.85, Math.sin(angle) * r] as [number, number, number];
+      // Cake top is globally at 1.15, candle half-height is 0.15 -> center at 1.3
+      return [Math.cos(angle) * r, 1.3, Math.sin(angle) * r] as [number, number, number];
     });
   }, [count]);
 

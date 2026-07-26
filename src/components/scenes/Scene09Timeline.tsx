@@ -83,25 +83,14 @@ export default function Scene09Timeline() {
           }}
         >
           {/* Back Cover */}
-          <div className="absolute inset-0 rounded-l-2xl rounded-r-xl bg-[#2a1a08] shadow-2xl border border-[#4a2e0e]"></div>
+          <div className="absolute inset-0 rounded-l-2xl rounded-r-xl bg-[#610000] shadow-2xl border border-[#3b0000]"></div>
           
           {/* Pages Container */}
           <div className="absolute inset-[10px] md:inset-[15px] flex rounded-lg overflow-hidden bg-[#fdf5e6] shadow-inner">
             
-            {/* Left Page (Image) */}
-            <div className="w-1/2 h-full relative border-r border-[#d4b483]/30 flex flex-col p-4 md:p-8">
+            {/* Left Page (Note) */}
+            <div className="w-1/2 h-full relative border-r border-[#d4b483]/30 p-6 md:p-12 flex flex-col justify-center text-center">
               <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
-              {leftImage && (
-                <div className="relative h-full w-full rounded-md overflow-hidden shadow-md border border-[#d4b483]/50 p-2 bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={leftImage} alt="Memory" className="w-full h-full object-cover rounded-sm" />
-                </div>
-              )}
-            </div>
-
-            {/* Right Page (Note) */}
-            <div className="w-1/2 h-full relative p-6 md:p-12 flex flex-col justify-center text-center">
-              <div className="absolute inset-0 bg-gradient-to-l from-black/5 to-transparent"></div>
               <p className="font-serif text-[#4a2e0e] text-sm md:text-lg leading-relaxed whitespace-pre-line z-10 italic relative">
                 <span className="absolute -top-6 -left-4 text-4xl text-[#d4b483]/40">"</span>
                 {noteText}
@@ -111,12 +100,23 @@ export default function Scene09Timeline() {
                 by me Kiran
               </p>
             </div>
+
+            {/* Right Page (Image) */}
+            <div className="w-1/2 h-full relative flex flex-col p-4 md:p-8">
+              <div className="absolute inset-0 bg-gradient-to-l from-black/5 to-transparent"></div>
+              {leftImage && (
+                <div className="relative h-full w-full rounded-md overflow-hidden shadow-md border border-[#d4b483]/50 p-2 bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={leftImage} alt="Memory" className="w-full h-full object-cover rounded-sm" />
+                </div>
+              )}
+            </div>
             
           </div>
 
           {/* Book Cover (Front) - Animates Open */}
           <div 
-            className="absolute top-0 left-1/2 w-1/2 h-full bg-[#3a220b] border-l border-[#5a3614] rounded-r-xl shadow-2xl origin-left transition-transform duration-1500 ease-in-out flex items-center justify-center"
+            className="absolute top-0 left-1/2 w-1/2 h-full bg-[#8b0000] border-l border-[#5c0000] rounded-r-xl shadow-2xl origin-left transition-transform duration-1500 ease-in-out flex items-center justify-center"
             style={{ 
               transformStyle: 'preserve-3d',
               transform: isOpen ? 'rotateY(-180deg)' : 'rotateY(0deg)',
@@ -124,7 +124,7 @@ export default function Scene09Timeline() {
           >
             {/* Front Cover Front Face */}
             <div 
-              className="absolute inset-0 backface-hidden rounded-r-xl bg-gradient-to-r from-[#2a1a08] to-[#3a220b] border-2 border-[#5a3614] flex flex-col items-center justify-center p-8"
+              className="absolute inset-0 backface-hidden rounded-r-xl bg-gradient-to-r from-[#610000] to-[#8b0000] border-2 border-[#5c0000] flex flex-col items-center justify-center p-8"
               style={{ backfaceVisibility: 'hidden' }}
             >
               <div className="w-full h-full border-2 border-dashed border-[#d4b483]/20 rounded-lg flex flex-col items-center justify-center">
