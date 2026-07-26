@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { useAuroraStore } from '@/store/useAuroraStore';
 import { useAudio } from '@/hooks/useAudio';
-import { cn, formatDate } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import type { Photo } from '@/types';
 
 /* ── 3D Fireflies ── */
@@ -243,7 +243,6 @@ export default function Scene06Forest() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 w-full p-6 text-center">
                 <h3 className="font-serif text-xl sm:text-2xl text-white/90 drop-shadow-xl">{memory.caption}</h3>
-                <p className="mt-2 font-mono text-[10px] sm:text-xs text-amber-400/80 tracking-widest uppercase drop-shadow-md">{formatDate(memory.date)}</p>
               </div>
             </div>
           </div>
