@@ -84,6 +84,19 @@ export default function Scene16Balloons() {
         <p className="mt-8 text-lg text-white/40 tracking-widest uppercase animate-pulse">
           To infinity and beyond
         </p>
+
+        <button
+          onClick={() => {
+            // Attempt to close the window, fallback to reloading the page
+            window.close();
+            setTimeout(() => {
+              window.location.reload();
+            }, 100);
+          }}
+          className="mt-12 group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm tracking-widest text-white/50 uppercase backdrop-blur-xl transition-all duration-500 hover:border-amber-400/30 hover:text-amber-300"
+        >
+          Exit Experience
+        </button>
       </div>
       
     </div>
